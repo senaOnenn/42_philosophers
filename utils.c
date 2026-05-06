@@ -1,0 +1,88 @@
+#include "philo.h"
+
+/*
+** ft_atoi:
+** Argümanları integer'a çevirmek için kullanılır (orijinal atoi yasak).
+*/
+int	ft_atoi(const char *str)
+{
+	long	res;
+	int		sign;
+
+	res = 0;
+	sign = 1;
+	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		res = (res * 10) + (*str - '0');
+		str++;
+	}
+	return ((int)(res * sign));
+}
+
+/*
+** current_time_ms:
+** gettimeofday ile epoch'tan itibaren geçen süreyi milisaniye döndürür.
+*/
+long long	current_time_ms(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((long long)tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+/*
+** check_sim_status:
+** death_mutex ile korunarak simülasyonun bitip bitmediğini kontrol eder.
+*/
+int	check_sim_status(t_data *sim)
+{
+	int	status;
+
+	pthread_mutex_lock(&sim->death_mutex);
+	status = sim->someone_died || sim->all_ate_enough;
+	pthread_mutex_unlock(&sim->death_mutex);
+	return (status);
+}
+
+/*
+** precise_sleep:
+** usleep'i küçük parçalara bölerek bekler. Biri ölürse anında çıkar.
+*/
+void	precise_sleep(long long duration_ms, t_data *sim)
+{
+	long long	start;
+
+	start = current_time_ms();
+	while ((current_time_ms() - start) < duration_ms)
+	{
+		if (check_sim_status(sim))
+			break ;
+		usleep(500);
+	}
+}
+
+/*
+** write_status:
+** Çıktıların birbirine girmemesi için print_mutex kullanır.
+*/
+void	write_status(t_philo *philo, const char *msg)
+{
+	long long	time_now;
+
+	pthread_mutex_lock(&philo->data->print_mutex);
+	if (!check_sim_status(philo->data))
+	{
+		time_now = current_time_ms() - philo->data->start_time;
+		printf("%lld %d %s\n", time_now, philo->id, msg);
+	}
+	pthread_mutex_unlock(&philo->data->print_mutex);
+}
