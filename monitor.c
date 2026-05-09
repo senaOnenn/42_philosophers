@@ -1,12 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monitor.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/09 20:13:31 by eonen             #+#    #+#             */
+/*   Updated: 2026/05/09 20:13:33 by eonen            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-/*
-** check_death:
-** Her filozofun last_meal_time'ına bakarak time_to_die'ı
-** geçip geçmediğini kontrol eder.
-** Ölen varsa ölüm mesajını basar, someone_died'ı set eder.
-** death_mutex ile korunur.
-*/
 static int	check_death(t_data *data)
 {
 	int			i;
@@ -33,11 +38,6 @@ static int	check_death(t_data *data)
 	return (0);
 }
 
-/*
-** check_all_ate:
-** must_eat_count ayarlanmışsa tüm filozofların yeterince
-** yiyip yemediğini kontrol eder.
-*/
 static int	check_all_ate(t_data *data)
 {
 	int	i;
@@ -64,11 +64,6 @@ static int	check_all_ate(t_data *data)
 	return (0);
 }
 
-/*
-** monitor_routine:
-** Ana thread'den ayrı çalışır; her 1ms'de ölüm ve
-** yeterli yeme kontrolü yapar.
-*/
 void	*monitor_routine(void *arg)
 {
 	t_data	*data;

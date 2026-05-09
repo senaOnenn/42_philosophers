@@ -1,10 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   actions.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/09 20:13:05 by eonen             #+#    #+#             */
+/*   Updated: 2026/05/09 20:13:06 by eonen            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "philo.h"
 
-/*
-** take_forks:
-** Deadlock'u önlemek için asimetrik çatal alma stratejisi.
-** Tekler önce sağ, çiftler önce sol çatalı alır.
-*/
 static void	take_forks(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
@@ -23,11 +31,6 @@ static void	take_forks(t_philo *philo)
 	}
 }
 
-/*
-** philo_eat:
-** Çatalları alır, yemek yeme zamanını günceller ve belirtilen
-** time_to_eat süresi kadar bekler.
-*/
 void	philo_eat(t_philo *philo)
 {
 	take_forks(philo);
@@ -41,21 +44,24 @@ void	philo_eat(t_philo *philo)
 	pthread_mutex_unlock(philo->right_fork);
 }
 
-/*
-** philo_sleep:
-** Simülasyon bitmemişse time_to_sleep süresi kadar uyur.
-*/
 void	philo_sleep(t_philo *philo)
 {
 	write_status(philo, "is sleeping");
 	precise_sleep(philo->data->time_to_sleep, philo->data);
 }
 
-/*
-** philo_think:
-** Filozofun düşünme eylemini terminale basar.
-*/
 void	philo_think(t_philo *philo)
 {
+	long long delay;
 	write_status(philo, "is thinking");
+
+	if (philo->data->num_philos % 2)
+    {
+        delay = (philo->data->time_to_eat * 2)
+              - philo->data->time_to_sleep;
+
+        if (delay > 0)
+            precise_sleep(delay * 0.42, philo->data);
+    }
+
 }

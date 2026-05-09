@@ -1,10 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/09 20:13:14 by eonen             #+#    #+#             */
+/*   Updated: 2026/05/09 20:13:15 by eonen            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "philo.h"
 
-/*
-** parse_args:
-** Argüman sayısını ve değerlerini kontrol eder.
-** (Kendi ft_atoi fonksiyonunu kullanmalısın, atoi YASAKTIR!)
-*/
 int	parse_args(int argc, char **argv, t_data *data)
 {
 	if (argc < 5 || argc > 6)
@@ -35,12 +43,12 @@ int	parse_args(int argc, char **argv, t_data *data)
 
 static int	init_mutexes(t_data *data)
 {
-	int	idx;
+	int	indx;
 
-	idx = -1;
-	while (++idx < data->num_philos)
+	indx = -1;
+	while (++indx < data->num_philos)
 	{
-		if (pthread_mutex_init(&data->forks[idx], NULL) != 0)
+		if (pthread_mutex_init(&data->forks[indx], NULL) != 0)
 			return (1);
 	}
 	if (pthread_mutex_init(&data->print_mutex, NULL) != 0)
@@ -50,13 +58,9 @@ static int	init_mutexes(t_data *data)
 	return (0);
 }
 
-/*
-** init_data:
-** Çatalları, filozofları ve kontrol mutex'lerini başlatır.
-*/
 int	init_data(t_data *data)
 {
-	int	idx;
+	int	indx;
 
 	data->someone_died = 0;
 	data->all_ate_enough = 0;
@@ -67,25 +71,21 @@ int	init_data(t_data *data)
 	if (init_mutexes(data) != 0)
 		return (1);
 	data->start_time = current_time_ms();
-	idx = -1;
-	while (++idx < data->num_philos)
+	indx = -1;
+	while (++indx < data->num_philos)
 	{
-		data->philos[idx].id = idx + 1;
-		data->philos[idx].meals_eaten = 0;
-		data->philos[idx].last_meal_time = data->start_time;
-		data->philos[idx].data = data;
-		data->philos[idx].right_fork = &data->forks[idx];
-		data->philos[idx].left_fork = &data->forks[(idx + 1) % data->num_philos];
-		if (pthread_mutex_init(&data->philos[idx].meal_mutex, NULL) != 0)
+		data->philos[indx].id = indx + 1;
+		data->philos[indx].meals_eaten = 0;
+		data->philos[indx].last_meal_time = data->start_time;
+		data->philos[indx].data = data;
+		data->philos[indx].right_fork = &data->forks[indx];
+		data->philos[indx].left_fork = &data->forks[(indx + 1) % data->num_philos];
+		if (pthread_mutex_init(&data->philos[indx].meal_mutex, NULL) != 0)
 			return (1);
 	}
 	return (0);
 }
 
-/*
-** cleanup:
-** Tüm mutex'leri ve tahsis edilen bellekleri temizler.
-*/
 void	cleanup(t_data *data)
 {
 	int	idx;

@@ -1,11 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/09 20:13:22 by eonen             #+#    #+#             */
+/*   Updated: 2026/05/09 20:13:24 by eonen            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-/*
-** start_threads:
-** Her filozof için thread oluşturur, ardından monitor thread'ini başlatır.
-** Son olarak tüm thread'lerin bitmesini (join) bekler.
-** Norminette satır sınırını aşmamak için ana fonksiyondan ayrılmıştır.
-*/
 static int	start_threads(t_data *data)
 {
 	pthread_t	monitor;
@@ -27,13 +33,6 @@ static int	start_threads(t_data *data)
 	return (0);
 }
 
-/*
-** main:
-** 1. Argümanları parse et.
-** 2. Veri yapılarını başlat.
-** 3. Thread'leri çalıştır ve bekle.
-** 4. Belleği temizle ve çık.
-*/
 int	main(int argc, char **argv)
 {
 	t_data	data;

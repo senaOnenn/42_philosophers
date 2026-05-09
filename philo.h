@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/09 20:13:51 by eonen             #+#    #+#             */
+/*   Updated: 2026/05/09 20:13:53 by eonen            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -8,7 +20,6 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-/* ========== STRUCTS ========== */
 
 typedef struct s_data	t_data;
 
@@ -40,25 +51,15 @@ typedef struct s_data
 	t_philo			*philos;
 }	t_data;
 
-/* ========== PROTOTYPES ========== */
 
-/* init.c */
 int			parse_args(int argc, char **argv, t_data *data);
 int			init_data(t_data *data);
 void		cleanup(t_data *data);
-
-/* philo.c */
 void		*philo_routine(void *arg);
-
-/* actions.c */
 void		philo_eat(t_philo *philo);
 void		philo_sleep(t_philo *philo);
 void		philo_think(t_philo *philo);
-
-/* monitor.c */
 void		*monitor_routine(void *arg);
-
-/* utils.c */
 int			ft_atoi(const char *str);
 long long	current_time_ms(void);
 void		precise_sleep(long long duration_ms, t_data *data);

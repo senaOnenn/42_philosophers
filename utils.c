@@ -1,9 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/09 20:13:58 by eonen             #+#    #+#             */
+/*   Updated: 2026/05/09 20:14:00 by eonen            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-/*
-** ft_atoi:
-** Argümanları integer'a çevirmek için kullanılır (orijinal atoi yasak).
-*/
 int	ft_atoi(const char *str)
 {
 	long	res;
@@ -27,10 +35,6 @@ int	ft_atoi(const char *str)
 	return ((int)(res * sign));
 }
 
-/*
-** current_time_ms:
-** gettimeofday ile epoch'tan itibaren geçen süreyi milisaniye döndürür.
-*/
 long long	current_time_ms(void)
 {
 	struct timeval	tv;
@@ -39,24 +43,16 @@ long long	current_time_ms(void)
 	return ((long long)tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-/*
-** check_sim_status:
-** death_mutex ile korunarak simülasyonun bitip bitmediğini kontrol eder.
-*/
 int	check_sim_status(t_data *sim)
 {
-	int	status;
+	int	stat;
 
 	pthread_mutex_lock(&sim->death_mutex);
-	status = sim->someone_died || sim->all_ate_enough;
+	stat = sim->someone_died || sim->all_ate_enough; 
 	pthread_mutex_unlock(&sim->death_mutex);
-	return (status);
+	return (stat);
 }
 
-/*
-** precise_sleep:
-** usleep'i küçük parçalara bölerek bekler. Biri ölürse anında çıkar.
-*/
 void	precise_sleep(long long duration_ms, t_data *sim)
 {
 	long long	start;
@@ -70,10 +66,6 @@ void	precise_sleep(long long duration_ms, t_data *sim)
 	}
 }
 
-/*
-** write_status:
-** Çıktıların birbirine girmemesi için print_mutex kullanır.
-*/
 void	write_status(t_philo *philo, const char *msg)
 {
 	long long	time_now;

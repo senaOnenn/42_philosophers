@@ -1,9 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/09 20:13:41 by eonen             #+#    #+#             */
+/*   Updated: 2026/05/09 20:13:44 by eonen            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-/*
-** single_philo_routine:
-** Sadece tek filozof olduğunda çalışır. Tek çatalı alır ve ölümü bekler.
-*/
 static void	*single_philo_routine(t_philo *philo)
 {
 	pthread_mutex_lock(philo->right_fork);
@@ -13,15 +21,11 @@ static void	*single_philo_routine(t_philo *philo)
 	return (NULL);
 }
 
-/*
-** philo_routine:
-** Her filozofun ana yaşam döngüsünü (thread fonksiyonu) yönetir.
-*/
-void	*philo_routine(void *arg)
+void	*philo_routine(void *av)
 {
 	t_philo	*philo;
 
-	philo = (t_philo *)arg;
+	philo = (t_philo *)av;
 	if (philo->data->num_philos == 1)
 		return (single_philo_routine(philo));
 	if (philo->id % 2 == 0)
