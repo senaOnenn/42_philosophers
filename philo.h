@@ -6,7 +6,7 @@
 /*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 20:13:51 by eonen             #+#    #+#             */
-/*   Updated: 2026/05/09 20:13:53 by eonen            ###   ########.fr       */
+/*   Updated: 2026/05/10 15:08:23 by eonen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
-
 
 typedef struct s_data	t_data;
 

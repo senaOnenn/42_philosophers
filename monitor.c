@@ -6,7 +6,7 @@
 /*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 20:13:31 by eonen             #+#    #+#             */
-/*   Updated: 2026/05/09 20:13:33 by eonen            ###   ########.fr       */
+/*   Updated: 2026/05/10 16:33:42 by eonen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	check_death(t_data *data)
 			pthread_mutex_lock(&data->death_mutex);
 			data->someone_died = 1;
 			pthread_mutex_unlock(&data->death_mutex);
-			printf("%lld %d died\n", 
+			printf("%lld %d died\n",
 				current_time_ms() - data->start_time, data->philos[i].id);
 			pthread_mutex_unlock(&data->print_mutex);
 			return (1);

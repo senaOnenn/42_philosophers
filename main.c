@@ -6,7 +6,7 @@
 /*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 20:13:22 by eonen             #+#    #+#             */
-/*   Updated: 2026/05/09 20:13:24 by eonen            ###   ########.fr       */
+/*   Updated: 2026/05/10 16:37:48 by eonen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
+	memset(&data, 0, sizeof(t_data));
 	if (parse_args(argc, argv, &data))
 		return (1);
 	if (init_data(&data))

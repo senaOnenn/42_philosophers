@@ -6,7 +6,7 @@
 /*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 20:13:58 by eonen             #+#    #+#             */
-/*   Updated: 2026/05/09 20:14:00 by eonen            ###   ########.fr       */
+/*   Updated: 2026/05/10 16:36:05 by eonen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	write_status(t_philo *philo, const char *msg)
 {
 	long long	time_now;
 
+	if (check_sim_status(philo->data))
+		return ;
 	pthread_mutex_lock(&philo->data->print_mutex);
 	if (!check_sim_status(philo->data))
 	{
