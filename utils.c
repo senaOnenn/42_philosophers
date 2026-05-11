@@ -6,12 +6,12 @@
 /*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 20:13:58 by eonen             #+#    #+#             */
-/*   Updated: 2026/05/10 16:36:05 by eonen            ###   ########.fr       */
+/*   Updated: 2026/05/11 14:11:57 by eonen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
+//* error handle 200a için
 int	ft_atoi(const char *str)
 {
 	long	res;
@@ -48,7 +48,7 @@ int	check_sim_status(t_data *sim)
 	int	stat;
 
 	pthread_mutex_lock(&sim->death_mutex);
-	stat = sim->someone_died || sim->all_ate_enough; 
+	stat = sim->someone_died || sim->all_ate_enough;
 	pthread_mutex_unlock(&sim->death_mutex);
 	return (stat);
 }

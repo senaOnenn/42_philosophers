@@ -6,10 +6,9 @@
 /*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 20:13:14 by eonen             #+#    #+#             */
-/*   Updated: 2026/05/09 20:13:15 by eonen            ###   ########.fr       */
+/*   Updated: 2026/05/11 11:39:17 by eonen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "philo.h"
 
@@ -79,7 +78,8 @@ int	init_data(t_data *data)
 		data->philos[indx].last_meal_time = data->start_time;
 		data->philos[indx].data = data;
 		data->philos[indx].right_fork = &data->forks[indx];
-		data->philos[indx].left_fork = &data->forks[(indx + 1) % data->num_philos];
+		data->philos[indx].left_fork = &data->forks[(indx + 1)
+			% data->num_philos];
 		if (pthread_mutex_init(&data->philos[indx].meal_mutex, NULL) != 0)
 			return (1);
 	}

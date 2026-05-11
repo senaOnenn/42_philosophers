@@ -6,7 +6,7 @@
 /*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 20:13:22 by eonen             #+#    #+#             */
-/*   Updated: 2026/05/10 16:37:48 by eonen            ###   ########.fr       */
+/*   Updated: 2026/05/11 14:16:23 by eonen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ static int	start_threads(t_data *data)
 	i = -1;
 	while (++i < data->num_philos)
 	{
+		//* açılmazsa önceki threadlerin hepsini geriye doğru kapa öyle çık
 		if (pthread_create(&data->philos[i].thread, NULL,
 				philo_routine, &data->philos[i]) != 0)
 			return (1);
 	}
+	//* bu da açılmazsa joinle beklemeye çalış
 	if (pthread_create(&monitor, NULL, monitor_routine, data) != 0)
 		return (1);
 	pthread_join(monitor, NULL);

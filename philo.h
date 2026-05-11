@@ -6,7 +6,7 @@
 /*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 20:13:51 by eonen             #+#    #+#             */
-/*   Updated: 2026/05/10 15:08:23 by eonen            ###   ########.fr       */
+/*   Updated: 2026/05/11 12:44:33 by eonen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_data
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
 }	t_data;
-
 
 int			parse_args(int argc, char **argv, t_data *data);
 int			init_data(t_data *data);
