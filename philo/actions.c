@@ -6,34 +6,44 @@
 /*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 20:13:05 by eonen             #+#    #+#             */
-/*   Updated: 2026/05/11 14:24:17 by eonen            ###   ########.fr       */
+/*   Updated: 2026/06/20 09:48:26 by eonen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	take_forks(t_philo *philo)
+static void	lock_forks(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->left_fork);
-		write_status(philo, "has taken a fork");
-		//* öldü mü öldüyse çatalı bırak
 		pthread_mutex_lock(philo->right_fork);
-		write_status(philo, "has taken a fork");
 	}
 	else
 	{
 		pthread_mutex_lock(philo->right_fork);
-		write_status(philo, "has taken a fork");
 		pthread_mutex_lock(philo->left_fork);
-		write_status(philo, "has taken a fork");
 	}
+}
+
+int	take_forks(t_philo *philo)
+{
+	lock_forks(philo);
+	if (check_sim_status(philo->data))
+	{
+		pthread_mutex_unlock(philo->left_fork);
+		pthread_mutex_unlock(philo->right_fork);
+		return (0);
+	}
+	write_status(philo, "has taken a fork");
+	write_status(philo, "has taken a fork");
+	return (1);
 }
 
 void	philo_eat(t_philo *philo)
 {
-	take_forks(philo);
+	if (!take_forks(philo))
+		return ;
 	pthread_mutex_lock(&philo->meal_mutex);
 	philo->last_meal_time = current_time_ms();
 	philo->meals_eaten++;

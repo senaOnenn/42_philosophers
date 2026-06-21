@@ -6,7 +6,7 @@
 /*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 20:13:41 by eonen             #+#    #+#             */
-/*   Updated: 2026/05/11 14:22:05 by eonen            ###   ########.fr       */
+/*   Updated: 2026/06/20 09:28:27 by eonen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	*philo_routine(void *av)
 	t_philo	*philo;
 
 	philo = (t_philo *)av;
-	// data race değil araştırılcak
 	if (philo->data->num_philos == 1)
 		return (single_philo_routine(philo));
 	if (philo->id % 2 == 0)

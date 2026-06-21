@@ -4,10 +4,12 @@ CFLAGS      = -Wall -Wextra -Werror -pthread
 
 SRCS        = main.c \
               init.c \
+              init_1.c \
               philo.c \
               actions.c \
               monitor.c \
-              utils.c
+              utils.c \
+              utils_1.c
 
 OBJS        = $(SRCS:.c=.o)
 
@@ -16,7 +18,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
-%.o: %.c philo.h
+%.o: %.c 
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

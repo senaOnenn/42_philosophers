@@ -6,7 +6,7 @@
 /*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 20:13:51 by eonen             #+#    #+#             */
-/*   Updated: 2026/05/11 12:44:33 by eonen            ###   ########.fr       */
+/*   Updated: 2026/06/20 14:29:09 by eonen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ typedef struct s_data
 	pthread_mutex_t	death_mutex;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
+	int				forks_init;
+	int				philos_init;
+	int				print_mutex_init;
+	int				death_mutex_init;
 }	t_data;
 
 int			parse_args(int argc, char **argv, t_data *data);
@@ -58,10 +62,12 @@ void		philo_eat(t_philo *philo);
 void		philo_sleep(t_philo *philo);
 void		philo_think(t_philo *philo);
 void		*monitor_routine(void *arg);
-int			ft_atoi(const char *str);
+int			ft_atoi_philo(const char *str);
+void		*ft_calloc(size_t count, size_t size);
 long long	current_time_ms(void);
 void		precise_sleep(long long duration_ms, t_data *data);
 void		write_status(t_philo *philo, const char *msg);
 int			check_sim_status(t_data *data);
+void		set_stop_flag(t_data *sim);
 
 #endif

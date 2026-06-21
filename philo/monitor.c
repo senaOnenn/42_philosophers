@@ -6,7 +6,7 @@
 /*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 20:13:31 by eonen             #+#    #+#             */
-/*   Updated: 2026/05/11 14:26:34 by eonen            ###   ########.fr       */
+/*   Updated: 2026/06/20 12:33:34 by eonen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	check_death(t_data *data)
 		pthread_mutex_lock(&data->philos[i].meal_mutex);
 		elapsed = current_time_ms() - data->philos[i].last_meal_time;
 		pthread_mutex_unlock(&data->philos[i].meal_mutex);
-		if (elapsed >= data->time_to_die)
+		if (elapsed > data->time_to_die)
 		{
 			pthread_mutex_lock(&data->print_mutex);
 			pthread_mutex_lock(&data->death_mutex);

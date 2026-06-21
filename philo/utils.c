@@ -6,34 +6,11 @@
 /*   By: eonen <eonen@student.42istanbul.com.tr     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 20:13:58 by eonen             #+#    #+#             */
-/*   Updated: 2026/05/11 14:11:57 by eonen            ###   ########.fr       */
+/*   Updated: 2026/06/20 09:31:43 by eonen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-//* error handle 200a için
-int	ft_atoi(const char *str)
-{
-	long	res;
-	int		sign;
-
-	res = 0;
-	sign = 1;
-	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		res = (res * 10) + (*str - '0');
-		str++;
-	}
-	return ((int)(res * sign));
-}
 
 long long	current_time_ms(void)
 {
